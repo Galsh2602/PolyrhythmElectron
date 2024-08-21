@@ -1,0 +1,37 @@
+{
+  "name": "lucid-rhythms",
+  "version": "1.0.0",
+  "description": "A polyrhythmic sound visualizer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^latest",
+    "electron-builder": "^latest"
+  },
+  "build": {
+    "appId": "com.yourdomain.lucid-rhythms",
+    "productName": "Lucid Rhythms",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "main.js",
+      "renderer.js",
+      "style.css",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
