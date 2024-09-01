@@ -1,37 +1,17 @@
 {
-  "name": "lucid-rhythms",
+  "name": "polyrhythmelectron",
   "version": "1.0.0",
-  "description": "A polyrhythmic sound visualizer",
   "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "build": "electron-builder"
+  "dependencies": {
+    "electron": "^25.3.1",
+    "tone": "^15.0.4"
   },
   "devDependencies": {
-    "electron": "^latest",
-    "electron-builder": "^latest"
+    "electron": "^25.3.1",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
   },
-  "build": {
-    "appId": "com.yourdomain.lucid-rhythms",
-    "productName": "Lucid Rhythms",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "index.html",
-      "main.js",
-      "renderer.js",
-      "style.css",
-      "assets/**/*"
-    ],
-    "win": {
-      "target": "nsis"
-    },
-    "mac": {
-      "target": "dmg"
-    },
-    "linux": {
-      "target": "AppImage"
-    }
+  "scripts": {
+    "start": "electron ."
   }
 }

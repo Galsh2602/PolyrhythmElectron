@@ -6,28 +6,28 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
-      contextIsolation: false
-    },
-    icon: path.join(__dirname, 'assets', 'icon.png')
-  });
-
-  mainWindow.loadFile('index.html');
-}
-
-app.whenReady().then(() => {
-  createWindow();
-
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+      contextIsolation: false, // Important for development
     }
   });
-});
+
+  // Load the index.html from the src directory
+  mainWindow.loadFile(path.join(__dirname, 'src', 'index.html'));
+
+  // Open the DevTools (optional)
+  // mainWindow.webContents.openDevTools();
+}
+
+app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
+  }
+});
+
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
   }
 });
