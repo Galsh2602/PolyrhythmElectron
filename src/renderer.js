@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             startY: 50,    // Start at 50% Y
             directionX: 1, // Move right initially
             speed: 1,      // Movement speed
-            note: 'C4'     // Note to play
+            note: 'G4'     // Note to play
         },
         {
             radius: 50,
