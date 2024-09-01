@@ -20,6 +20,7 @@ export class Circle {
         } else {
             this.color = this.defaultColor;
         }
+        console.log(`Circle initialized at X: ${startX}%, Y: ${startY}%`);
 
         this.element = document.createElement('div');
         
@@ -30,7 +31,7 @@ export class Circle {
         this.element.style.width = `${this.radius * 2}px`;
         this.element.style.height = `${this.radius * 2}px`;
         this.element.style.left = `${this.startX}%`;
-        this.element.style.top = `${this.startY}%`;
+        this.element.style.top = `${this.startY}%`;  // Ensure startY is applied here
         this.element.style.borderColor = this.color; // Set the border color to the selected color
         this.element.style.setProperty('--glow-color', this.color); // Set the glow color dynamically
     }

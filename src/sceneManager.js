@@ -5,71 +5,69 @@ export class SceneManager {
     constructor(container) {
         this.container = container;
         this.Circles = [];
-        this.synth = new Tone.Synth().toDestination();
+        this.synth = new Tone.Synth().toDestination(); // Single shared synth instance
+        this.isPlayingSound = false; // Flag to prevent multiple sounds playing simultaneously
     }
 
     // Initialize the scene with multiple circles
     initScene(circleConfigs) {
         circleConfigs.forEach(config => {
-            this.createCircle(config);
+            const { radius, colorName, startX, startY, directionX, speed, note } = config;
+            const circle = new Circle(radius, colorName, startX, startY, note);
+            this.Circles.push({ circle, directionX, speed, note });
+            circle.appendTo(this.container);
         });
-        this.startAnimation();
-    }
 
-    // Create a circle based on configuration and add it to the scene
-    createCircle(config) {
-        const { radius, colorName, startX, startY, directionX, directionY, speed, note } = config;
-        const circle = new Circle(radius, colorName, startX, startY, note);
-        this.Circles.push({ circle, directionX, directionY, speed, note });
-        circle.appendTo(this.container);
+        this.startAnimation();
     }
 
     // Start the animation for all circles
     startAnimation() {
         const moveCircles = () => {
-            this.Circles.forEach(item => {
-                this.updateCirclePosition(item);
+            this.Circles.forEach((item) => {
+                let { circle, directionX, speed } = item;
+                
+                // Get the current position in percentage
+                let currentPositionX = parseFloat(circle.element.style.left);
+                let currentPositionY = parseFloat(circle.element.style.top);
+    
+                // Update the X position linearly
+                currentPositionX += directionX * speed / this.container.clientWidth * 100;
+    
+                // Ensure the X position stays within the bounds of 0% to 100%
+                if (currentPositionX >= 80 || currentPositionX <= 20) {
+                    item.directionX *= -1;
+                }
+    
+                // Calculate the Y position based on a sine wave centered around the initial Y position
+                const amplitude = this.container.clientHeight / 4; // Amplitude is a quarter of the container's height
+                const frequency = (Math.PI) / this.container.clientWidth; // Full sine wave cycle across the container width
+                currentPositionY = parseFloat(circle.startY) + (amplitude / this.container.clientHeight * 100) * Math.sin(frequency * (currentPositionX / 100) * this.container.clientWidth);
+    
+                // Apply the new positions to the circle element
+                circle.setPosition(currentPositionX, currentPositionY);
+
+                // Play sound when circle crosses the center
+                if (Math.abs(currentPositionX - 50) < 1 && !this.isPlayingSound) {
+                    this.playSound(circle.getNote());
+                }
             });
-            requestAnimationFrame(moveCircles);
+    
+            requestAnimationFrame(moveCircles); // Use requestAnimationFrame for smoother animation
         };
+    
         moveCircles();
     }
 
-    // Update the position of a circle based on its current direction and speed
-    updateCirclePosition(item) {
-        let { circle, directionX, speed } = item;
-        let currentPositionX = parseFloat(circle.element.style.left);
-        let currentPositionY = parseFloat(circle.element.style.top);
-
-        // Update the X position linearly
-        currentPositionX += directionX * speed / this.container.clientWidth * 100;
-
-        // Reverse direction if the circle hits the horizontal bounds
-        if (currentPositionX >= 100 || currentPositionX <= 0) {
-            item.directionX *= -1;
-        }
-
-        // Calculate Y position based on a sine wave
-        const amplitude = this.container.clientHeight / 4;
-        const frequency = Math.PI / this.container.clientWidth;
-        currentPositionY = 50 + (amplitude / this.container.clientHeight * 100) * Math.sin(frequency * (currentPositionX / 100) * this.container.clientWidth);
-
-        // Apply new positions to the circle element
-        circle.setPosition(currentPositionX, currentPositionY);
-
-        // Play sound if the circle reaches the center
-        if (Math.abs(currentPositionX - 50) < 0.2) {
-            this.playSound(circle.getNote(), circle);
-        }
-    }
-
-    // Play a sound for the circle's note
-    playSound(note, circle) {
-        if (this.synth) {
+    // Play sound with a debounce to prevent crashes
+    playSound(note) {
+        if (!this.isPlayingSound) {
+            this.isPlayingSound = true;
             this.synth.triggerAttackRelease(note, "8n");
 
-            // Trigger the glow effect on the circle
-            circle.glow(1000); // Glow for 1 second (1000 ms)
+            setTimeout(() => {
+                this.isPlayingSound = false;
+            }, 300); // Debounce for 300ms to prevent overlapping sounds
         }
     }
 }
