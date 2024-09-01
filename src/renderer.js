@@ -74,6 +74,16 @@ document.addEventListener('DOMContentLoaded', () => {
             speed: 5,     // Slow movement speed
             note: 'G3'    // Deeper note
         }
+        ,
+        {
+            radius: 100,
+            colorName: 'soft coral',
+            startX: 50,   // Start at 70% X
+            startY: 50,   // Start at 70% Y (lower on the screen)
+            directionX: 1, // Move slowly to the right
+            speed: 5,     // Slow movement speed
+            note: 'C2'    // Deeper note
+        }
     ];
     
     

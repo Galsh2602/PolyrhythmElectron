@@ -32,7 +32,7 @@ export class SceneManager {
                 currentPositionX += directionX * speed / this.container.clientWidth * 100;
     
                 // Ensure the X position stays within the bounds of 0% to 100%
-                if (currentPositionX >= 85 || currentPositionX <= 15) {
+                if (currentPositionX >= 80 || currentPositionX <= 10) {
                     item.directionX *= -1;
                 }
     
