@@ -1,5 +1,5 @@
 export class Circle {
-    constructor(radius, colorName = null, x = 50, y = 50, note = null) {
+    constructor(radius, colorName = null, startX = 50, startY = 50, note = null) {
         this.radius = radius;
         this.colors = {
             'soft coral': '#FFB6B9',
@@ -10,6 +10,9 @@ export class Circle {
             'lavender': '#C8BFE7'
         };
         this.defaultColor = '#FFB6B9'; // Default to soft coral if the color is not found
+        this.startX = startX;
+        this.startY = startY;
+        this.note = note;
 
         // Check if the provided colorName exists in the colors list
         if (colorName && this.colors[colorName.toLowerCase()]) {
@@ -17,8 +20,6 @@ export class Circle {
         } else {
             this.color = this.defaultColor;
         }
-
-        this.note = note; // Store the note associated with this circle
 
         this.element = document.createElement('div');
         
@@ -28,17 +29,10 @@ export class Circle {
         // Apply dynamic styles
         this.element.style.width = `${this.radius * 2}px`;
         this.element.style.height = `${this.radius * 2}px`;
+        this.element.style.left = `${this.startX}%`;
+        this.element.style.top = `${this.startY}%`;
         this.element.style.borderColor = this.color; // Set the border color to the selected color
-        
-        // Set the initial position of the circle
-        this.setPosition(x, y);
-    }
-
-    // Method to set the position of the circle
-    setPosition(x, y) {
-        this.element.style.left = `${x}%`;  // Position in percentage relative to the container
-        this.element.style.top = `${y}%`;
-        this.element.style.transform = `translate(-${x}%, -${y}%)`; // Adjust for the circle's center
+        this.element.style.setProperty('--glow-color', this.color); // Set the glow color dynamically
     }
 
     // Method to append the circle to a parent element
@@ -46,7 +40,21 @@ export class Circle {
         parent.appendChild(this.element);
     }
 
-    // Method to get the associated note
+    // Method to set the position of the circle
+    setPosition(x, y) {
+        this.element.style.left = `${x}%`;
+        this.element.style.top = `${y}%`;
+    }
+
+    // Method to trigger the glow effect
+    glow(duration = 1000) {
+        this.element.classList.add('glow');
+        setTimeout(() => {
+            this.element.classList.remove('glow');
+        }, duration);
+    }
+
+    // Method to get the note assigned to the circle (if applicable)
     getNote() {
         return this.note;
     }

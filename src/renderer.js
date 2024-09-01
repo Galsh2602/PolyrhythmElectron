@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             startX: 25,    // Start at 25% X
             startY: 50,    // Start at 50% Y
             directionX: 1, // Move right initially
-            speed: 1,      // Movement speed
+            speed: 3,      // Movement speed
             note: 'G4'     // Note to play
         },
         {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             startX: 75,    // Start at 75% X
             startY: 50,    // Start at 50% Y
             directionX: -1,// Move left initially
-            speed: 2,      // Movement speed
+            speed: 4,      // Movement speed
             note: 'E4'     // Note to play
         }
         // Add more circles as needed

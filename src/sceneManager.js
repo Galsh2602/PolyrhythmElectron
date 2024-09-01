@@ -58,13 +58,18 @@ export class SceneManager {
         circle.setPosition(currentPositionX, currentPositionY);
 
         // Play sound if the circle reaches the center
-        if (Math.abs(currentPositionX - 50) < 1) {
-            this.playSound(circle.getNote());
+        if (Math.abs(currentPositionX - 50) < 0.2) {
+            this.playSound(circle.getNote(), circle);
         }
     }
 
     // Play a sound for the circle's note
-    playSound(note) {
-        this.synth.triggerAttackRelease(note, "8n");
+    playSound(note, circle) {
+        if (this.synth) {
+            this.synth.triggerAttackRelease(note, "8n");
+
+            // Trigger the glow effect on the circle
+            circle.glow(1000); // Glow for 1 second (1000 ms)
+        }
     }
 }
