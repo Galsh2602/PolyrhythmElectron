@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             startX: 25,   // Start at 25% X
             startY: 10,   // Start at 10% Y (slightly higher)
             directionX: 1, // Move right initially
-            speed: 2,     // Movement speed
+            speed: 4,     // Movement speed
             note: 'C5'    // Note to play
         },
         {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             startX: 25,   // Start at 25% X
             startY: 20,   // Start at 15% Y (slightly lower)
             directionX: 1, // Move right initially
-            speed: 2,     // Same speed for simplicity
+            speed: 4,     // Same speed for simplicity
             note: 'D5'    // Note to play
         },
     
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             startX: 75,   // Start at 75% X
             startY: 10,   // Start at 10% Y (slightly higher)
             directionX: -1, // Move left initially
-            speed: 2,     // Movement speed
+            speed: 4,     // Movement speed
             note: 'E5'    // Note to play
         },
         {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             startX: 75,   // Start at 75% X
             startY: 20,   // Start at 15% Y (slightly lower)
             directionX: -1, // Move left initially
-            speed: 2,     // Same speed for simplicity
+            speed: 4,     // Same speed for simplicity
             note: 'G5'    // Note to play
         },
     
@@ -51,16 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
             radius: 50,
             colorName: 'pale peach',
             startX: 30,   // Start at 30% X
-            startY: 70,   // Start at 70% Y (lower on the screen)
+            startY: 65,   // Start at 70% Y (lower on the screen)
             directionX: 1, // Move slowly to the right
-            speed: 1,     // Slow movement speed
+            speed: 2,     // Slow movement speed
             note: 'C4'    // Deeper note
         },
         {
             radius: 50,
             colorName: 'light mint',
             startX: 50,   // Start at 50% X (centered)
-            startY: 75,   // Start at 75% Y (lower on the screen)
+            startY: 50,   // Start at 75% Y (lower on the screen)
             directionX: -1, // Move slowly to the left
             speed: 1,     // Slow speed for consistency
             note: 'A3'    // Deeper note
@@ -69,9 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
             radius: 50,
             colorName: 'lavender',
             startX: 70,   // Start at 70% X
-            startY: 70,   // Start at 70% Y (lower on the screen)
+            startY: 60,   // Start at 70% Y (lower on the screen)
             directionX: 1, // Move slowly to the right
-            speed: 1,     // Slow movement speed
+            speed: 3,     // Slow movement speed
             note: 'G3'    // Deeper note
         }
     ];
