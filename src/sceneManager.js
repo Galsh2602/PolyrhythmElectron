@@ -1,12 +1,9 @@
-import * as Tone from 'tone';
 import { Circle } from './circle.js';
 
 export class SceneManager {
     constructor(container) {
         this.container = container;
         this.Circles = [];
-        this.synth = new Tone.Synth().toDestination(); // Single shared synth instance
-        this.isPlayingSound = false; // Flag to prevent multiple sounds playing simultaneously
     }
 
     // Initialize the scene with multiple circles
@@ -35,7 +32,7 @@ export class SceneManager {
                 currentPositionX += directionX * speed / this.container.clientWidth * 100;
     
                 // Ensure the X position stays within the bounds of 0% to 100%
-                if (currentPositionX >= 80 || currentPositionX <= 20) {
+                if (currentPositionX >= 85 || currentPositionX <= 15) {
                     item.directionX *= -1;
                 }
     
@@ -48,8 +45,8 @@ export class SceneManager {
                 circle.setPosition(currentPositionX, currentPositionY);
 
                 // Play sound when circle crosses the center
-                if (Math.abs(currentPositionX - 50) < 1 && !this.isPlayingSound) {
-                    this.playSound(circle.getNote());
+                if (Math.abs(currentPositionX - 50) < 1) {
+                    circle.playSound(); // Use the playSound method within Circle class
                 }
             });
     
@@ -57,17 +54,5 @@ export class SceneManager {
         };
     
         moveCircles();
-    }
-
-    // Play sound with a debounce to prevent crashes
-    playSound(note) {
-        if (!this.isPlayingSound) {
-            this.isPlayingSound = true;
-            this.synth.triggerAttackRelease(note, "8n");
-
-            setTimeout(() => {
-                this.isPlayingSound = false;
-            }, 300); // Debounce for 300ms to prevent overlapping sounds
-        }
     }
 }
