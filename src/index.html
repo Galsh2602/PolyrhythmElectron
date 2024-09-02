@@ -3,46 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="http://unpkg.com/tone"></script>
     <title>Polyrhythm Electron</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="visualization">
-        <div id="toolbar">
-            <h2>Circle Properties</h2>
-            <label for="circle-select">Select Circle:</label>
-            <select id="circle-select"></select>
-        
-            <label for="radius-input">Radius:</label>
-            <input type="number" id="radius-input" min="10" max="100" value="50">
-        
-            <label for="color-input">Color:</label>
-            <select id="color-input">
-                <option value="soft coral">Soft Coral</option>
-                <option value="blush pink">Blush Pink</option>
-                <option value="pale peach">Pale Peach</option>
-                <option value="light mint">Light Mint</option>
-                <option value="sky blue">Sky Blue</option>
-                <option value="lavender">Lavender</option>
-            </select>
-        
-            <label for="note-input">Note:</label>
-            <input type="text" id="note-input" value="C4">
-        
-            <label for="speed-input">Speed:</label>
-            <input type="number" id="speed-input" min="0.1" max="10" step="0.1" value="1">
-        
-            <button id="update-circle">Update Circle</button>
-            <button id="remove-circle">Remove Circle</button>
-            
-            <h2>Add New Circle</h2>
-            <button id="add-circle">Add Circle</button>
-        </div>
-    
+    <div id="visualization"></div>
+
+    <div id="toolbox-button">
+        <h2><</h2>
     </div>
-    <!-- Ensure the path correctly points to the dist folder -->
+
+    <div id="toolbox" class="hidden">
+        <h2>Circle Properties</h2>
+        
+        <label for="circle-select">Select Circle:</label>
+        <select id="circle-select"></select>
+        
+        <label for="radius-input">Radius:</label>
+        <input type="number" id="radius-input" min="10" max="100" value="50">
+        
+        <label for="color-input">Color:</label>
+        <select id="color-input">
+            <option value="soft coral">Soft Coral</option>
+            <option value="blush pink">Blush Pink</option>
+            <option value="pale peach">Pale Peach</option>
+            <option value="light mint">Light Mint</option>
+            <option value="sky blue">Sky Blue</option>
+            <option value="lavender">Lavender</option>
+        </select>
+        
+        <label for="note-input">Note:</label>
+        <input type="text" id="note-input" value="C4">
+        
+        <label for="speed-input">Speed:</label>
+        <input type="number" id="speed-input" min="0.1" max="10" step="0.1" value="1">
+        
+        <button id="update-circle">Update Circle</button>
+        <button id="remove-circle">Remove Circle</button>
+        
+        <h2>Add New Circle</h2>
+        <button id="add-circle">Add Circle</button>
+    </div>
+
     <script src="../dist/bundle.js"></script>
-
-
 </body>
 </html>

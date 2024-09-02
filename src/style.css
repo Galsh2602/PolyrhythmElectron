@@ -6,9 +6,10 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #f6d365, #fda085, #fbc2eb, #a18cd1); /* Cooler, dynamic gradient */
+    background: linear-gradient(135deg, #FFDEE9, #B5FFFC, #FECBF8); /* Pink, blue, and peach gradient */
     background-size: 400% 400%;
     animation: gradientAnimation 30s ease infinite;
+    font-family: 'Baloo 2', sans-serif; /* A playful, rounded font */
 }
 
 @keyframes gradientAnimation {
@@ -16,33 +17,6 @@ body, html {
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-#toolbar {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-}
-
-#toolbar h2 {
-    margin: 10px 0;
-}
-
-#toolbar label {
-    display: block;
-    margin: 5px 0;
-}
-
-#toolbar input, #toolbar select, #toolbar button {
-    display: block;
-    width: 100%;
-    margin: 5px 0;
-    padding: 5px;
-}
-
 
 #visualization {
     position: relative;
@@ -51,113 +25,151 @@ body, html {
     overflow: hidden; /* To ensure nothing overflows the screen */
 }
 
-.circle {
-    border-radius: 50%;
+/* Toolbox button that appears as an icon on the side */
+#toolbox-button {
     position: absolute;
-    left: 50%;
+    left: -25px; /* Start half-hidden on the left side */
     top: 50%;
-    transform: translate(-50%, -50%);
-    border: 3px solid var(--glow-color); /* Border color dynamically set via JS */
-    background-color: transparent; /* Hollow circle */
-    transition: border-color 0.1s ease, transform 0.1s ease;
-    will-change: transform, left, top;
-    box-shadow: 0px 4px 15px rgba(255, 182, 193, 0.5), 0px 8px 25px rgba(255, 160, 122, 0.4); /* Softer, coral shadows */
-}
-
-.circle::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, rgba(255, 228, 225, 0.5), rgba(255, 250, 250, 0));
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: #FFC1E3; /* Soft pink */
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    box-shadow: 0 0 20px 10px var(--glow-color); /* Softer glow effect using dynamic color */
-}
-
-.glow {
-    outline: 5px solid var(--glow-color, rgba(255, 182, 193, 0.8)); /* Use outline instead of box-shadow */
-    animation: pulse 1.5s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1) translate(-50%, -50%); /* Add translate to ensure it stays centered */
-        outline-offset: 0px; /* Keep the outline inside the circle's boundary */
-    }
-    50% {
-        transform: scale(1.1) translate(-50%, -50%); /* Slight scaling for more emphasis */
-        outline-offset: -5px; /* Move the outline outside to create a glow effect */
-    }
-}
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #f6d365, #fda085, #fbc2eb, #a18cd1); /* Cooler, dynamic gradient */
-    background-size: 400% 400%;
-    animation: gradientAnimation 30s ease infinite;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: left 0.3s ease, transform 0.3s ease;
+    font-size: 24px;
+    color: #FFF;
+    z-index: 1000; /* Ensure it is above other elements */
 }
 
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+#toolbox-button:hover {
+    left: 0; /* Move fully into view on hover */
 }
 
-#visualization {
-    position: relative;
+#toolbox {
+    position: absolute;
+    left: -250px; /* Start off-screen on the left */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 250px;
+    height: 100%; /* Full height */
+    background-color: rgba(255, 255, 255, 0.8); /* Soft transparent white */
+    border-radius: 0 20px 20px 0; /* Rounded edges on the right side */
+    padding: 20px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    display: block;
+    transition: left 0.3s ease;
+}
+
+#toolbox.open {
+    left: 0; /* Slide into view */
+}
+
+#toolbox-button.open {
+    left: 225px; /* Position the button at the right edge of the toolbox */
+    transform: translateY(-50%) rotate(180deg); /* Rotate the arrow to point left */
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="number"],
+input[type="text"],
+select {
     width: 100%;
-    height: 100%;
-    overflow: hidden; /* To ensure nothing overflows the screen */
+    padding: 8px;
+    border-radius: 15px;
+    border: 2px solid #FFC1E3;
+    background-color: #FFF;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 16px;
+    margin-bottom: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus {
+    border-color: #FF88B6;
+    box-shadow: 0px 4px 15px rgba(255, 136, 182, 0.5);
+}
+
+button {
+    background-color: #FFC1E3; /* Soft pink */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-bottom: 10px;
+    display: block;
+    width: 100%;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Baloo 2', sans-serif;
+}
+
+button:hover {
+    background-color: #FF88B6; /* Slightly darker pink on hover */
+    transform: translateY(-3px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* Circle styling */
 .circle {
     border-radius: 50%;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    border: 3px solid var(--glow-color); /* Border color dynamically set via JS */
+    border: 3px solid; /* The color will be dynamically set in the JS */
     background-color: transparent; /* Hollow circle */
-    transition: border-color 0.1s ease, transform 0.1s ease;
-    will-change: transform, left, top;
-    box-shadow: 0px 4px 15px rgba(255, 182, 193, 0.5), 0px 8px 25px rgba(255, 160, 122, 0.4); /* Softer, coral shadows */
+    box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3), 
+                0px 8px 25px rgba(255, 255, 255, 0.2); /* Softer shadow */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Remove transform to prevent jumping */
 }
 
-.circle::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, rgba(255, 228, 225, 0.5), rgba(255, 250, 250, 0));
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    box-shadow: 0 0 20px 10px var(--glow-color); /* Softer glow effect using dynamic color */
-}
-
+/* Glow effect applied when a sound is played */
 .glow {
-    outline: 5px solid var(--glow-color, rgba(255, 182, 193, 0.8)); /* Use outline instead of box-shadow */
-    animation: pulse 1.5s ease-in-out infinite;
+    box-shadow: 0px 4px 20px var(--glow-color), 
+                0px 8px 30px var(--glow-color), 
+                0 0 40px var(--glow-color), 
+                0 0 50px var(--glow-color); /* Stronger glow without scaling */
+    animation: glowPulse 1.5s ease-in-out infinite;
 }
 
-@keyframes pulse {
+@keyframes glowPulse {
     0%, 100% {
-        transform: scale(1) translate(-50%, -50%); /* Add translate to ensure it stays centered */
-        outline-offset: 0px; /* Keep the outline inside the circle's boundary */
+        box-shadow: 0px 4px 20px var(--glow-color), 
+                    0px 8px 30px var(--glow-color), 
+                    0 0 40px var(--glow-color), 
+                    0 0 50px var(--glow-color);
     }
     50% {
-        transform: scale(1) translate(-50%, -50%); /* Slight scaling for more emphasis */
-        outline-offset: -5px; /* Move the outline outside to create a glow effect */
+        box-shadow: 0px 8px 25px var(--glow-color), 
+                    0px 12px 35px var(--glow-color), 
+                    0 0 50px var(--glow-color), 
+                    0 0 60px var(--glow-color);
     }
 }
