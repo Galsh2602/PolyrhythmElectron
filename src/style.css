@@ -16,6 +16,33 @@ body, html {
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+#toolbar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+#toolbar h2 {
+    margin: 10px 0;
+}
+
+#toolbar label {
+    display: block;
+    margin: 5px 0;
+}
+
+#toolbar input, #toolbar select, #toolbar button {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px;
+}
+
 
 #visualization {
     position: relative;
