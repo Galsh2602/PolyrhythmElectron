@@ -2,14 +2,20 @@ import './style.css'; // Adjust this path based on where your CSS file is locate
 import { SceneManager } from './sceneManager.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const toolbox = document.getElementById('toolbox');
+    const toolboxContainer = document.getElementById('toolbox-container');
     const toolboxButton = document.getElementById('toolbox-button');
+    const arrow = document.getElementById('arrow');
 
     toolboxButton.addEventListener('click', () => {
-        toolbox.classList.toggle('open');
-        toolboxButton.classList.toggle('open');
+        toolboxContainer.classList.toggle('open');
+        
+        // Rotate the arrow based on the toolbox state
+        if (toolboxContainer.classList.contains('open')) {
+            arrow.innerHTML = '❮'; // Arrow points left when toolbox is open
+        } else {
+            arrow.innerHTML = '❯'; // Arrow points right when toolbox is closed
+        }
     });
-    
 
     const circleConfigs = [
         // Small circles moving right to left
@@ -23,11 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
             note: 'C5'    // Note to play
         }
     ];
-    
-    
-    const container = document.getElementById('visualization');  // Initialize the SceneManager with the container
+
+    const container = document.getElementById('visualization');
     const sceneManager = new SceneManager(container);
-    // Initialize the metronome scene
     sceneManager.initScene(circleConfigs);
 
     // Toolbar controls

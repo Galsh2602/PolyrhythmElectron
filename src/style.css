@@ -25,12 +25,19 @@ body, html {
     overflow: hidden; /* To ensure nothing overflows the screen */
 }
 
-/* Toolbox button that appears as an icon on the side */
-#toolbox-button {
+/* Toolbox and button container */
+#toolbox-container {
     position: absolute;
-    left: -25px; /* Start half-hidden on the left side */
+    left: -330px; /* Initially hide the toolbox off-screen */
     top: 50%;
     transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    transition: left 0.5s ease;
+}
+
+/* Toolbox button that is part of the unit */
+#toolbox-button {
     width: 50px;
     height: 50px;
     background-color: #FFC1E3; /* Soft pink */
@@ -40,38 +47,28 @@ body, html {
     align-items: center;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: left 0.3s ease, transform 0.3s ease;
+    transition: transform 0.3s ease;
     font-size: 24px;
     color: #FFF;
     z-index: 1000; /* Ensure it is above other elements */
+    margin-left: -25px; /* Position the button at the edge of the toolbox */
 }
 
 #toolbox-button:hover {
-    left: 0; /* Move fully into view on hover */
+    transform: scale(1.1);
 }
 
 #toolbox {
-    position: absolute;
-    left: -250px; /* Start off-screen on the left */
-    top: 50%;
-    transform: translateY(-50%);
     width: 250px;
     height: 100%; /* Full height */
     background-color: rgba(255, 255, 255, 0.8); /* Soft transparent white */
     border-radius: 0 20px 20px 0; /* Rounded edges on the right side */
-    padding: 20px;
+    padding: 40px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    display: block;
-    transition: left 0.3s ease;
 }
 
-#toolbox.open {
+#toolbox-container.open {
     left: 0; /* Slide into view */
-}
-
-#toolbox-button.open {
-    left: 225px; /* Position the button at the right edge of the toolbox */
-    transform: translateY(-50%) rotate(180deg); /* Rotate the arrow to point left */
 }
 
 h2 {
@@ -172,4 +169,12 @@ button:active {
                     0 0 50px var(--glow-color), 
                     0 0 60px var(--glow-color);
     }
+}
+
+#arrow {
+    transition: transform 0.3s ease;
+}
+
+#toolbox-container.open #arrow {
+    transform: rotate(180deg); /* Rotate the arrow when toolbox is open */
 }
