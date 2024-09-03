@@ -51,7 +51,7 @@ body, html {
     font-size: 24px;
     color: #FFF;
     z-index: 1000; /* Ensure it is above other elements */
-    margin-left: -25px; /* Position the button at the edge of the toolbox */
+    margin-left: -5px; /* Position the button at the edge of the toolbox */
 }
 
 #toolbox-button:hover {
@@ -99,6 +99,7 @@ select {
     font-size: 16px;
     margin-bottom: 10px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Ensure consistent sizing */
 }
 
 input[type="number"]:focus,
@@ -169,12 +170,4 @@ button:active {
                     0 0 50px var(--glow-color), 
                     0 0 60px var(--glow-color);
     }
-}
-
-#arrow {
-    transition: transform 0.3s ease;
-}
-
-#toolbox-container.open #arrow {
-    transform: rotate(180deg); /* Rotate the arrow when toolbox is open */
 }
