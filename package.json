@@ -26,12 +26,15 @@
     }
   },
   "devDependencies": {
-    "electron": "^latest",
-    "electron-builder": "^latest",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^7.1.2",
+    "electron": "latest",
+    "electron-builder": "latest",
+    "style-loader": "^4.0.0",
     "webpack": "^5.0.0",
-    "babel-loader": "^8.2.2"
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "tone": "^latest"
+    "tone": "latest"
   }
 }
